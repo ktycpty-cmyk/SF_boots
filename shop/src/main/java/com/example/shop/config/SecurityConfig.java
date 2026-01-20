@@ -15,9 +15,32 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http){
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
+        log.info("---------------securityFilterChain---------------------------");
+        http
+//                .csrf(config -> config.disable())
+                .authorizeHttpRequests(auth -> auth
+                        .requestMatchers("/css/**","/js/**", "/img/**", "/images/**").permitAll()
+                        .requestMatchers("/", "/members/**", "/item/**").permitAll()
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .anyRequest().authenticated()
 
-        log. info("----------------------securityFilterChain------------------------");
+                )
+                .formLogin(login -> login
+                                .loginPage("/members/login")
+                                .loginProcessingUrl("/members/login")
+                                .failureUrl("/members/login/error")
+                                .defaultSuccessUrl("/", true)
+                                .usernameParameter("email") //name: username 기입할 필요 없음
+                        //.passwordParameter("pwd") //만약 name: pasword아니고 name: pwd
+                )
+                .logout(logout -> logout
+                        .logoutUrl("/members/logout")
+                        .logoutSuccessUrl("/")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
+                );
+
         return http.build();
     }
 
