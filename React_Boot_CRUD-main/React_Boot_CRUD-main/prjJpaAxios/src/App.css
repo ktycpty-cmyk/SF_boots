@@ -1,0 +1,10 @@
+/* src/App.css */
+.App {
+  width: 100%;
+}
+
+/* 상단바 그림자 효과 추가 */
+.navbar {
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
