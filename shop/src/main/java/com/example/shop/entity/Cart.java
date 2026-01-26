@@ -1,4 +1,3 @@
-
 package com.example.shop.entity;
 
 import jakarta.persistence.*;
@@ -10,14 +9,14 @@ import lombok.ToString;
 @Table(name="cart")
 @Getter@Setter
 @ToString
-public class Cart {
+public class Cart extends BaseEntity {
 
     @Id
     @Column(name = "cart_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "member_id")
     private Member member;
 }

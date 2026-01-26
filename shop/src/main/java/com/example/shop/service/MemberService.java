@@ -1,6 +1,5 @@
 package com.example.shop.service;
 
-
 import com.example.shop.entity.Member;
 import com.example.shop.repository.MemberRepository;
 import lombok.AllArgsConstructor;
@@ -20,24 +19,23 @@ import java.util.Optional;
 @Transactional
 public class MemberService implements UserDetailsService {
 
-    private final MemberRepository memberRepository;
+    private final MemberRepository memberRepoistory;
 
-    public Member saveMember(Member member) {
-        Optional<Member> findMember = memberRepository.findByEmail(member.getEmail());
+    public Member saveMember(Member member){
+        Optional<Member> findMember = memberRepoistory.findByEmail(member.getEmail());
 
-
-        if (findMember.isPresent())
+        if(findMember.isPresent())
             throw new IllegalStateException("이미 가입된 회원입니다.");
 
-        return memberRepository.save(member);
+        return memberRepoistory.save(member);
     }
 
-
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException{
-         Member member = memberRepository.findByEmail(email)
-                 .orElseThrow(()-> new UsernameNotFoundException(email + "해당하는 회원이 없습니다."));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        log.info("------------email------------------ : " + email);
 
+        Member member = memberRepoistory.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException(email + "해당하는 회원이 없습니다."));
 
         return User.builder()
                 .username(member.getName())
@@ -45,5 +43,4 @@ public class MemberService implements UserDetailsService {
                 .roles(member.getRole().toString())
                 .build();
     }
-
 }
