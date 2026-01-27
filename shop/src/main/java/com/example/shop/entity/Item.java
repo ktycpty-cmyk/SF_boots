@@ -3,9 +3,7 @@ package com.example.shop.entity;
 import com.example.shop.constant.ItemSellStatus;
 import com.example.shop.dto.ItemFormDto;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -14,7 +12,10 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class Item extends BaseEntity{
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
+public class Item extends  BaseEntity{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,5 +45,4 @@ public class Item extends BaseEntity{
         this.itemDetail = itemFormDto.getItemDetail();
         this.itemSellStatus = itemFormDto.getItemSellStatus();
     }
-
 }

@@ -9,14 +9,14 @@ import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 @EntityListeners(value = {AuditingEntityListener.class})
-@MappedSuperclass
+@MappedSuperclass  //테이블은 안만들고, 컬럼만 물려주는 부모 클래스
 @Getter
-public class BaseEntity extends BaseTimeEntity{
+public class BaseEntity extends  BaseTimeEntity{
 
-    @CreatedBy
+    @CreatedBy  //작성자(생성자)
     @Column(updatable = false)
     private String createBy;
 
-    @LastModifiedBy
+    @LastModifiedBy //수정자
     private String modifiedBy;
 }

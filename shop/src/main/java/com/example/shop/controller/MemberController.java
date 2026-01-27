@@ -28,12 +28,11 @@ public class MemberController {
         return "/member/memberLoginForm";
     }
 
-    @GetMapping("/login/error")
+    @GetMapping(value = "/login/error")
     public String loginError(Model model){
-        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해 주세요");
+        model.addAttribute("loginErrorMsg", "아이디 또는 비밀번호를 확인해주세요.");
         return "/member/memberLoginForm";
     }
-
 
     @GetMapping(value= "/new")
     public String memberForm(Model model){
@@ -61,3 +60,16 @@ public class MemberController {
         return "redirect:/";
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -26,11 +26,11 @@ public class SecurityConfig {
 
                 )
                 .formLogin(login -> login
-                                .loginPage("/members/login")
-                                .loginProcessingUrl("/members/login")
-                                .failureUrl("/members/login/error")
-                                .defaultSuccessUrl("/", true)
-                                .usernameParameter("email") //name: username 기입할 필요 없음
+                        .loginPage("/members/login")
+                        .loginProcessingUrl("/members/login")
+                        .failureUrl("/members/login/error")
+                        .defaultSuccessUrl("/", true)
+                        .usernameParameter("email") //name: username 기입할 필요 없음
                         //.passwordParameter("pwd") //만약 name: pasword아니고 name: pwd
                 )
                 .logout(logout -> logout

@@ -1,4 +1,3 @@
-
 package com.example.shop.service;
 
 import com.example.shop.entity.ItemImg;
@@ -56,7 +55,7 @@ public class ItemImgService {
 
             String oriImgName = itemImgFile.getOriginalFilename();
             String imgName = fileService.uploadFile(itemImgLocation, oriImgName,
-                    itemImgFile.getBytes());
+                                    itemImgFile.getBytes());
             String imgUrl = "/images/item/" + imgName;
 
             // 변경감지 -> 자동 저장

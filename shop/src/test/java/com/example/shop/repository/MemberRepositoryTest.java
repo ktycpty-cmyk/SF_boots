@@ -10,11 +10,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.transaction.annotation.Transactional;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
 @Log4j2
+@Transactional
 class MemberRepositoryTest {
 
     @Autowired
@@ -34,23 +36,22 @@ class MemberRepositoryTest {
     @DisplayName("gildong 수정")
     @WithMockUser(username = "hong", roles = "USER")
     public void updateTest(){
-       Member member = memberRepository.findById(2L)
+        Member member = memberRepository.findById(2L)
                 .orElseThrow(EntityNotFoundException::new);
 
-       member.setName("까미");
+        member.setName("까미");
 
-       memberRepository.save(member);
+        memberRepository.save(member);
     }
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Test
-    public void createMember() {
-        MemberFormDto memberFormDto = MemberFormDto.builder()
-                .email("jinu@naver.com")
-                .name("지누")
-                .address("서울시 강동구 명일동")
+    public void createMember(){
+        MemberFormDto memberFormDto  = MemberFormDto.builder()
+                .email("user" +System.nanoTime()+ "+@user.com")
+                .name("강산")
+                .address("서울시 천호동")
                 .password("1234")
                 .build();
 
@@ -58,3 +59,6 @@ class MemberRepositoryTest {
         memberRepository.save(member);
     }
 }
+
+
+

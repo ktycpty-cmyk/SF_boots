@@ -33,10 +33,12 @@ class ItemServiceTest {
     @Autowired
     ItemImgRepository itemImgRepository;
 
-    List<MultipartFile> createMultipartFiles() throws Exception{
+    //가짜 이미지 파일 생성
+    List<MultipartFile> createMultipartFiles() throws  Exception{
+
         List<MultipartFile> multipartFileList = new ArrayList<>();
 
-        for (int i = 0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             String path = "c:/shop/item/";
             String imageName = "image" + i + ".jpg";
 
@@ -50,9 +52,8 @@ class ItemServiceTest {
     }
 
     @Test
-    @WithMockUser(username = "admin", roles = "ADMIN")
-    public void saveItem()throws Exception{
-
+    @WithMockUser(username = "amdin", roles = "ADMIN")
+    public void saveItem() throws Exception{
 
         ItemFormDto itemFormDto = ItemFormDto.builder()
                 .itemNm("테스트 상품")
@@ -70,10 +71,12 @@ class ItemServiceTest {
         List<ItemImg> itemImgList = itemImgRepository.findItemImgByItemIdOrderByIdAsc(itemId);
 
         log.info(itemImgList);
+
         Item item = itemRepository.findById(itemId)
                 .orElseThrow(() -> new EntityNotFoundException());
 
         assertEquals(itemImgList.get(0).getItem().getId(), item.getId());
+       // assertEquals(6, item.getId());
     }
 
 }

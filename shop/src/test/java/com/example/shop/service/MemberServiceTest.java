@@ -12,9 +12,8 @@ import org.springframework.transaction.annotation.Transactional;
 import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest
-@Transactional // 테스트 후 roll back
+//@Transactional  //테스트 후 rollback
 class MemberServiceTest {
-
 
     @Autowired
     private MemberService memberService;
@@ -22,12 +21,11 @@ class MemberServiceTest {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
     public Member createMember(){
         MemberFormDto memberFormDto = MemberFormDto.builder()
-                .email("rain@email.com")
-                .name("나나")
-                .address("서울시 강동구 암사동")
+                .email("test2@email.com")
+                .name("홍길동")
+                .address("서울시 마포구 합정동")
                 .password("1234")
                 .build();
 
