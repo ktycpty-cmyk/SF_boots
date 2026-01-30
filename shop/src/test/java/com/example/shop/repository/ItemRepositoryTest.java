@@ -131,6 +131,7 @@ class ItemRepositoryTest {
 
         QItem qItem = QItem.item;
 
+
         JPQLQuery<Item> query =
                 //queryFactory.select(qItem).from(qItem);
                 queryFactory.selectFrom(qItem)
@@ -143,6 +144,22 @@ class ItemRepositoryTest {
 
         long count = query.fetchCount();
         log.info("count : " + count);
+
+
+         /*
+
+        JPQLQuery<Item> query = queryFactory
+                .select(qItem)
+                .from(qItem)
+                .where(qItem.itemNm.like("%셔츠%"));
+
+        List<Item> list = query.fetch();
+
+        list.forEach(i -> log.info(i));
+        long count = query.fetchCount();
+        log.info(count);
+
+         */
     }
 
     @Test

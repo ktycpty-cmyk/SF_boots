@@ -38,7 +38,7 @@ public class MemberService implements UserDetailsService {
                 .orElseThrow(() -> new UsernameNotFoundException(email + "해당하는 회원이 없습니다."));
 
         return User.builder()
-                .username(member.getName())
+                .username(member.getEmail())
                 .password(member.getPassword())
                 .roles(member.getRole().toString())
                 .build();

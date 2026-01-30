@@ -3,7 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{layouts/layout1}">
 
-<!-- 사용자 스크립트 추가 -->
 <th:block layout:fragment="script">
     <script th:inline="javascript">
 
@@ -29,7 +28,6 @@
     </script>
 </th:block>
 
-<!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
     <style>
         select{
@@ -57,11 +55,9 @@
                 <td>
                     <a th:href="'/admin/item/'+${item.id}" th:text="${item.itemNm}"></a>
                 </td>
-                <!-- <td th:text="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>-->
-                <!-- <td th:text="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL} ? '판매중' : '품절'"></td>-->
-                <td th:text="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL ? '판매중' : '품절' }"></td>
+                <td th:text="${item.itemSellStatus.name() == 'SELL' ? '판매중' : '품절'}"></td>
                 <td th:text="${item.createBy}"></td>
-                <td th:text="${item.regTime}"></td>
+                <td th:text="${#temporals.format(item.regTime, 'yyyy-MM-dd HH:mm:ss')}"></td>
             </tr>
             </tbody>
         </table>

@@ -8,7 +8,6 @@
   <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
 </head>
 
-<!-- 사용자 스크립트 추가 -->
 <th:block layout:fragment="script">
   <script th:inline="javascript">
     $(document).ready(function(){
@@ -28,11 +27,11 @@
     }
 
     function order(){
-      var token = $("meta[name='_csrf']").attr("content");
-      var header = $("meta[name='_csrf_header']").attr("content");
+      let token = $("meta[name='_csrf']").attr("content");
+      let header = $("meta[name='_csrf_header']").attr("content");
 
-      var url = "/order";
-      var paramData = {
+      let url = "/order";
+      let paramData = {
         itemId : $("#itemId").val(),
         count : $("#count").val()
       };
@@ -110,7 +109,6 @@
   </script>
 </th:block>
 
-<!-- 사용자 CSS 추가 -->
 <th:block layout:fragment="css">
   <style>
     .mgb-15{
@@ -147,12 +145,13 @@
       <img th:src="${item.itemImgDtoList[0].imgUrl}" class = "rounded repImg" th:alt="${item.itemNm}">
     </div>
     <div class="wd50">
-            <span th:if="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL}" class="badge badge-primary mgb-15">
-                판매중
-            </span>
-      <span th:unless="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL}" class="badge btn-danger mgb-15" >
+      <span th:if="${item.itemSellStatus.name() == 'SELL'}" class="badge badge-primary mgb-15">
+       판매중
+      </span>
+
+      <span th:unless="${item.itemSellStatus.name() == 'SELL'}" class="badge btn-danger mgb-15" >
                 품절
-            </span>
+      </span>
       <div class="h4" th:text="${item.itemNm}"></div>
       <hr class="my-4">
 
@@ -174,11 +173,12 @@
         <h5>결제 금액</h5>
         <h3 name="totalPrice" id="totalPrice" class="font-weight-bold"></h3>
       </div>
-      <div th:if="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL}" class="text-right">
+
+      <div th:if="${item.itemSellStatus.name() == 'SELL'}" class="text-right">
         <button type="button" class="btn btn-light border border-primary btn-lg" onclick="addCart()">장바구니 담기</button>
         <button type="button" class="btn btn-primary btn-lg" onclick="order()">주문하기</button>
       </div>
-      <div th:unless="${item.itemSellStatus == T(com.example.shop.constant.ItemSellStatus).SELL}" class="text-right">
+      <div th:unless="${item.itemSellStatus.name() == 'SELL'}" class="text-right">
         <button type="button" class="btn btn-danger btn-lg">품절</button>
       </div>
     </div>

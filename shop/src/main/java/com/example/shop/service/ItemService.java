@@ -58,7 +58,7 @@ public class ItemService {
 
         List<ItemImg> itemImgList = itemImgRepository.findItemImgByItemIdOrderByIdAsc(itemId);
 
-        //저장한 이미지 가져옴
+        //ItemImg에 있는 것을 화면사에 보여주기 위해서 ItemImgDto 변환
         List<ItemImgDto> itemImgDtoList = new ArrayList<>();
 
         for(ItemImg itemImg: itemImgList){
