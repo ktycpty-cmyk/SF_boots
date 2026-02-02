@@ -21,22 +21,26 @@ public class MemberService {
 
     //생성자 주입
     public MemberService(MemberRepository memberRepository){
+
         this.memberRepository = memberRepository;
     }
 
     //수정
     public void update(Member member){
+
         memberRepository.save(member);
     }
 
     //추가
     public void insert(Member member){
+
         memberRepository.save(member);
     }
 
 
     //삭제
     public void delete(int memberId){
+
         memberRepository.deleteById(memberId);
     }
 
